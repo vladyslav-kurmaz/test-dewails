@@ -3,26 +3,29 @@ import { User } from "../types/types";
 
 const UserSearchService = () => {
   const _baceUrl = 'https://api.github.com';
-  const _apiKey = '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';
+  const _apiKey = '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';
 
   const {onRequest} = useHttp();
 
   const getUser = async (nikname: string): Promise<User | null> => {    
 
-      const res = onRequest(`${_baceUrl}/users/${nikname}`, _apiKey);
+      const res = await onRequest(`${_baceUrl}/users/${nikname}`, _apiKey);
       
-      if (typeof res === 'object' && res !== null) {
-        console.log(res);
-        
-        const {avatar_url, name, bio, html_url} = res;
-        console.log(avatar_url, name, bio, html_url);
-        
-        return res
+      if (typeof res === 'object' && res !== null) {        
+        return transform(res)
       }  
-
       return null 
-      
   }
+
+  const transform = (user: User): User => {    
+    return {
+      avatar_url: user.avatar_url,
+      name: user.name,
+      bio: user.bio,
+      html_url: user.html_url
+    };
+  }
+
   return {getUser};
 }
 

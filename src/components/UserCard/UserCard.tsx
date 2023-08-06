@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { useAppSelector, useAppDispatch } from '../../store/store';
 import { User } from '../../types/types';
-import { userClose } from '../../store/userSlice';
+import { userClose, updateError } from '../../store/userSlice';
 
 import './UserCard.scss';
 import SkeletonCastom from '../SkeletonCastom/SkeletonCastom';
@@ -16,7 +16,7 @@ const UserCard: FC = () => {
   }
 
   const renderCard = (user: User) => {
-    // if (user && user.name !== null) {
+    if (user && user.name !== null) {
       return (
         <>
           <span 
@@ -51,13 +51,14 @@ const UserCard: FC = () => {
           
         </>
       )  
-    // } else {
-    //   return <div>User not found</div>
-    // }
+    } else {      
+      dispatch(updateError(true))
+      setTimeout(() => dispatch(updateError(false)), 3000);
+    }
     
   }
 
-  const isUser = user ? renderCard(user) : <SkeletonCastom/>
+  const isUser = user && user.name ? renderCard(user) : <SkeletonCastom/>
 
   return (
     <div className='card'>

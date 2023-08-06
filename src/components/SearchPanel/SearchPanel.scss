@@ -23,6 +23,7 @@
   display: flex;
   justify-content: center;
   margin-bottom: 50px;
+  position: relative;
 
   &__line {
     position: relative;
@@ -58,6 +59,13 @@
       background-color: #1C145E;
       transition: all .3s;
     }
+  }
+
+  &__error {
+    position: absolute;
+    left: 35px;
+    bottom: -25px;
+    color: red;
   }
 
 }

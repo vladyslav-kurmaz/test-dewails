@@ -1,7 +1,7 @@
 import { FC, CSSProperties, ChangeEventHandler, FormEvent, useRef } from "react";
 
 import { useAppDispatch, useAppSelector } from "../../store/store";
-import {changeFocus, changeInputValue, fetchData} from '../../store/userSlice';
+import {changeFocus, changeInputValue, fetchData, updateError} from '../../store/userSlice';
 
 import './SearchPanel.scss';
 
@@ -10,7 +10,7 @@ import './SearchPanel.scss';
 const SearchPanel: FC = () => {
   const inputRef = useRef<HTMLInputElement>(null);
   const dispatch = useAppDispatch();
-  const {inputFocus, inputValue} = useAppSelector(state => state.userInfo);
+  const {inputFocus, inputValue, error} = useAppSelector(state => state.userInfo);
 
   const animationUp = {
     animationName: 'flyUp',
@@ -50,12 +50,22 @@ const SearchPanel: FC = () => {
 
   const submitForm = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    dispatch(updateError(false))
     dispatch(fetchData(inputValue));
 
     dispatch(changeInputValue(''))
       
   }
   
+  const userError = () => {
+    return error ? 
+      <div className="search__error">
+        User with this nikname is not found
+      </div>
+      :
+      null
+  }
+
   return (
     <form   
       className="search"
@@ -80,6 +90,8 @@ const SearchPanel: FC = () => {
       </div>
       
       <button type='submit' className="search__button">Search User</button>
+
+      {userError()}
     </form>
   )
 }

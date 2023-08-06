@@ -12,9 +12,9 @@ const initialState: userInfo = {
 
 export const fetchData = createAsyncThunk(
   `worker/fetchWorkers`,
-  async (nikname: string) => {
+  (nikname: string) => {
     const { getUser } = UserSearchService();
-    return await getUser(nikname);
+    return getUser(nikname);
   }
 );
 
@@ -30,6 +30,9 @@ const userInform = createSlice({
     },
     userClose: (state, action) => {
       state.user = action.payload;
+    },
+    updateError: (state, action) => {
+      state.error = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -55,4 +58,5 @@ export default reducer;
 export const { 
   changeFocus, 
   changeInputValue, 
-  userClose } = actions;
+  userClose,
+  updateError } = actions;
