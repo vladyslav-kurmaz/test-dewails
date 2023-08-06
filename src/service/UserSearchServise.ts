@@ -3,7 +3,7 @@ import { User } from "../types/types";
 
 const UserSearchService = () => {
   const _baceUrl = 'https://api.github.com';
-  const _apiKey = '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';
+  const _apiKey = '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';
 
   const {onRequest} = useHttp();
 
