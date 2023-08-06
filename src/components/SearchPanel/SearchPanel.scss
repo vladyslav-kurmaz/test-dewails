@@ -1,0 +1,74 @@
+@keyframes flyUp {
+  0% {
+    top: 50%;
+  }
+  100% {
+    top: 0;
+  }
+}
+
+@keyframes flyDown {
+  0% {
+    top: 0
+  }
+  100% {
+    top: 50%;
+  }
+}
+
+.search {
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50px;
+
+  &__line {
+    position: relative;
+    width: 80%;
+
+    &-input {
+      box-sizing: border-box;
+      padding: 10px;
+      width: 100%;
+    }
+
+    &-label {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: text;
+      padding: 0 5px;
+      background-color: #fff;
+
+    }
+  }
+
+  &__button {
+    cursor: pointer;
+    background-color: #5B23A9;
+    color: #fff;
+    font-weight: 700;
+    transition: all .3s;
+
+    &:hover {
+      box-shadow: 0px 8px 20px 0px rgba(6, 23, 48, 0.20);
+      background-color: #1C145E;
+      transition: all .3s;
+    }
+  }
+
+}
+
+@media screen and (max-width: 619px) {
+  .search {
+    flex-direction: column;
+
+    &__line {
+      width: 100%;
+      margin-bottom: 15px;
+    }
+  }
+}
